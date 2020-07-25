@@ -4,7 +4,7 @@
 #### Created On: 07/25/2020  
 
 ## Description
-CLI appliction built with node.js using inquirer and fs packages that allows the user to build a team with a Manager and as many Engineers and Interns as needed. The user is prompted to input information for each employee and when finished an HTML file is rendered that will display the full team and employee details. 
+CLI application built with node.js using inquirer and fs packages that allows the user to build a team with a Manager and as many Engineers and Interns as needed. The user is prompted to input information for each employee and when finished an HTML file is rendered that will display the full team and employee details. 
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)

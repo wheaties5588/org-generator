@@ -15,6 +15,7 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 
+//Questions for the manager role
 const managerQuestions = [
     {
         type: "input",
@@ -38,7 +39,7 @@ const managerQuestions = [
     }
 ]
 
-
+//Questions for the engineer role
 const engineerQuestions = [
   {
       type: "input",
@@ -62,7 +63,7 @@ const engineerQuestions = [
   }
 ]
 
-
+//Questions for the intern role
 const internQuestions = [
   {
       type: "input",
@@ -86,10 +87,10 @@ const internQuestions = [
   }
 ]
 
-
+//Empty array that new employees created in the app will be pushed to then used to render the HTML
 var employees = [];
 
-//New Manager
+//New Manager function with prompt, then calling newEmp function
 newManager = () => {
   
   inquirer.prompt(managerQuestions).then(res => {
@@ -114,16 +115,20 @@ newEmp = () => {
       ]
     }
   ]).then(res => {
+    
+    //Control if another employee is going to be created, will call those functions appropriately, if another rolse isn't chosen, the HTML file will be written and user will exit the app
     if (res.empType === "Engineer") {
       newEngineer();
     } else if (res.empType === "Intern") {
       newIntern();
     } else {
-      // Write to file
+      // If directory doesn't exist, it is created here
       if (!fs.existsSync(OUTPUT_DIR)) {
         console.log("Creating output directory..");
         fs.mkdirSync(OUTPUT_DIR);
       }
+      
+      //Write the file using the output path and the render function with the employees array passed
       fs.writeFile(outputPath, render(employees), "utf8", function() {
         console.log("File successfully created!");
       })
@@ -134,6 +139,7 @@ newEmp = () => {
   });  
 }
 
+//Function for new engineer role
 newEngineer = () => {
   inquirer.prompt(engineerQuestions).then(res => {
     employees.push(new Engineer(res.engName, res.engID, res.engEmail, res.engGithub));
@@ -141,7 +147,7 @@ newEngineer = () => {
   })
 }
 
-
+//Function for new intern role
 newIntern = () => {
   inquirer.prompt(internQuestions).then(res => {
     employees.push(new Intern(res.internName, res.internID, res.internEmail, res.internSchool));
